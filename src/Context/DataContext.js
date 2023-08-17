@@ -1,10 +1,10 @@
 import {createContext,useState,useEffect} from "react";
-import Post from "../Post"
-import PostLayout from "../PostLayout"
-import {Routes,Route,Link,useNavigate}from "react-router-dom";
+
+
+import {useNavigate}from "react-router-dom";
 import {format} from "date-fns";
 import api from "../api/posts"
-import EditPost from "../EditPost"
+
 import useWindowSize from "../hooks/useWindowsSize";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 
@@ -67,7 +67,7 @@ export const DataProvider =({children})=>{
       const newPost ={id,title:postTitle,datetime,body:postBody};
        try{
         const response=await api.post('/posts',newPost)
-        const allPosts=[...posts,newPost];
+        const allPosts=[...posts,response.data];
       setPosts(allPosts);
       setPostTitle('');
       setPostBody('');
